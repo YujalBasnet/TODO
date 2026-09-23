@@ -30,11 +30,7 @@ const App = () => {
         },
         {
           path: "todo",
-          element: (
-            <ProtectedRoute>
-              <Todo />
-            </ProtectedRoute>
-          ),
+          element:< Todo />,
         },
         {
           path: "login",

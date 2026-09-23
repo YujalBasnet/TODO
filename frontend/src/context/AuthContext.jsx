@@ -1,3 +1,4 @@
+
 import { createContext, useState } from "react";
 
 const AuthContext = createContext();
@@ -6,18 +7,10 @@ const AuthContextProvider = ({ children }) => {
   const defaultUsers = [
     {
       id: 1,
-      name: "Admin",
-      email: "admin@fakestore.com",
-      password: "admin123",
-      role: "admin",
+      name: "John",
+      email: "john@gmail.com",
+      password: "user123",
     },
-    {
-  id: 2,
-  name: "John",
-  email: "john@gmail.com",
-  password: "user123",
-  role: "user",
-},
   ];
 
   // Get registered users from localStorage
@@ -29,9 +22,11 @@ const AuthContextProvider = ({ children }) => {
     }
 
     localStorage.setItem("appUsers", JSON.stringify(defaultUsers));
+
     return defaultUsers;
   };
 
+  // Current logged-in user
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("appUser")) || null
   );
@@ -41,21 +36,20 @@ const AuthContextProvider = ({ children }) => {
     const users = getUsers();
 
     const user = users.find(
-    (user) =>
-    user.email.toLowerCase() === value.email.trim().toLowerCase() &&
-    user.password === value.password
-);
+      (user) =>
+        user.email.toLowerCase() === value.email.trim().toLowerCase() &&
+        user.password === value.password
+    );
 
     if (!user) {
       throw new Error("Invalid email or password");
     }
 
-    // Don't keep the password in the logged-in session
+    // Don't store password in the logged-in session
     const loggedInUser = {
       id: user.id,
       name: user.name,
       email: user.email,
-      role: user.role,
     };
 
     localStorage.setItem(
@@ -73,7 +67,8 @@ const AuthContextProvider = ({ children }) => {
     const users = getUsers();
 
     const existingUser = users.find(
-      (user) => user.email === value.email
+      (user) =>
+        user.email.toLowerCase() === value.email.trim().toLowerCase()
     );
 
     if (existingUser) {
@@ -85,7 +80,6 @@ const AuthContextProvider = ({ children }) => {
       name: value.name,
       email: value.email,
       password: value.password,
-      role: "user",
     };
 
     const updatedUsers = [...users, newUser];
@@ -104,8 +98,6 @@ const AuthContextProvider = ({ children }) => {
     setCurrentUser(null);
   };
 
-
-
   return (
     <AuthContext.Provider
       value={{
@@ -113,7 +105,6 @@ const AuthContextProvider = ({ children }) => {
         register,
         currentUser,
         logout,
-        
       }}
     >
       {children}
@@ -122,3 +113,4 @@ const AuthContextProvider = ({ children }) => {
 };
 
 export { AuthContext, AuthContextProvider };
+
