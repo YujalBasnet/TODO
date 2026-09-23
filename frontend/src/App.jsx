@@ -1,16 +1,38 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Todo from "./pages/todo";
+
+import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
 import Home from "./layout/Home";
+import Landing from "./pages/Landing";
+import Todo from "./pages/todo";
+
+
+
+const ProtectedRoute = ({ children }) => {
+  const user = localStorage.getItem("user");
+
+  if (!user) {
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+};
 
 const App = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Home />,
+      element: <Home/>,
       children: [
         {
           index: true,
-          element: <Todo />,
+          element: <Landing/>,
+        },
+        {
+          path: "todo",
+          element: (
+            <ProtectedRoute>
+              <Todo />
+            </ProtectedRoute>
+          ),
         },
       ],
     },

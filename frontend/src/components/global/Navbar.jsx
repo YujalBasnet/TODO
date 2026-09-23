@@ -1,48 +1,67 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
-  const navLinkClass = ({ isActive }) =>
-    `font-medium transition ${
-      isActive
-        ? "text-white border-b-2 border-white pb-1"
-        : "text-white hover:text-amber-200"
-    }`;
+  const navigate = useNavigate();
+
+  const user = localStorage.getItem("user");
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    navigate("/");
+  };
 
   return (
-    <nav className="flex h-20 items-center justify-between bg-amber-600 px-6 shadow-md">
+    <nav className="h-20 bg-amber-600 px-8 flex items-center justify-between">
 
-      {/* Logo */}
       <Link to="/" className="text-3xl font-bold text-white">
-        FakeStore
+        Todo App
       </Link>
 
-      {/* Navigation */}
-      <ul className="flex items-center gap-6">
-        <li>
-          <NavLink to="/" end className={navLinkClass}>
-            Home
-          </NavLink>
-        </li>
-      </ul>
+      <div className="flex items-center gap-6">
 
-      {/* Right side */}
-      <div className="flex items-center gap-3">
-        <Link
-          to="/login"
-          className="rounded-md bg-blue-500 px-4 py-2 font-medium text-white hover:bg-blue-600"
+        <NavLink
+          to="/"
+          className="text-white font-medium"
         >
-          Login
-        </Link>
+          Home
+        </NavLink>
 
-        <Link
-          to="/register"
-          className="rounded-md bg-red-500 px-4 py-2 font-medium text-white hover:bg-red-600"
-        >
-          Register
-        </Link>
+        {user ? (
+          <>
+            <NavLink
+              to="/todo"
+              className="text-white font-medium"
+            >
+              Todo
+            </NavLink>
+
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 text-white px-4 py-2 rounded-md"
+            >
+              Logout
+            </button>
+          </>
+        ) : (
+          <>
+            <Link
+              to="/login"
+              className="bg-blue-500 text-white px-4 py-2 rounded-md"
+            >
+              Login
+            </Link>
+
+            <Link
+              to="/register"
+              className="bg-green-500 text-white px-4 py-2 rounded-md"
+            >
+              Register
+            </Link>
+          </>
+        )}
+
       </div>
-
     </nav>
   );
 };
