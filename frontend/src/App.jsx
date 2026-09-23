@@ -3,6 +3,8 @@ import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom"
 import Home from "./layout/Home";
 import Landing from "./pages/Landing";
 import Todo from "./pages/todo";
+import Login from "./components/form/Login";
+import Register from "./components/form/Register";
 
 
 
@@ -34,6 +36,14 @@ const App = () => {
             </ProtectedRoute>
           ),
         },
+        {
+          path: "login",
+          element: <Login/>
+        },
+        {
+          path: "register",
+          element: <Register/>
+        }
       ],
     },
   ]);
