@@ -64,8 +64,24 @@ export const createTodo = (req, res) => {
 
 export const deleteTodo = (req, res) => {
   try{
+    const { id } = req.params;
+    const {user_id} = req.query;
+    if(!id || !user_id){
+      return res.status(400).send({message: "id and user_id are required"});
+    }
+    const q = "DELETE FROM todos WHERE id = ? AND user_id = ?";
 
-  }catch(error){
+    database.query(q, [id, user_id], (err, data) => {
+      if(err){
+        return res.status(500).send({message: "Error while deleting todo", error: err});
+      }
+      if(data.affectedRows === 0){
+        return res.status(404).send({message: "Todo not found"});
+      }
+      return res.status(200).send({message: "Todo deleted successfully"});
+    });
+
+  } catch(error){
     console.log(error);
     return res.status(500).send({
       message: "Server error",
