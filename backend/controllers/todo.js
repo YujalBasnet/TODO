@@ -64,8 +64,14 @@ export const createTodo = (req, res) => {
 
 export const deleteTodo = (req, res) => {
   try{
+
+    console.log("Params:", req.params);
+    console.log("Body:", req.body);
+
     const { id } = req.params;
-    const {user_id} = req.query;
+    const {user_id} = req.body;
+    console.log("Todo ID:", id, "User ID:", user_id);
+
     if(!id || !user_id){
       return res.status(400).send({message: "id and user_id are required"});
     }
