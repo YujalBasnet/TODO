@@ -60,7 +60,9 @@ const Register = () => {
         email: email,
         password: password,
       });
+      
       console.log("Registration successful:", response.data);
+
       navigate("/login");
     } catch (err) {
       setError(
