@@ -1,19 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext} from "react";
 import axios from "axios";
+import { AuthContext } from "../context/AuthContext";
 
 function Todo() {
+  const { currentUser } = useContext(AuthContext);
   const [todos, setTodos] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("");
+  
 
-  useEffect(() => { getTodos();
-  }, []);
+  useEffect(() => { if(currentUser){
+
+   getTodos();
+  }
+  }, [currentUser]);
 
   const getTodos = async () => {
     try {
-      const response = await axios.get("http://localhost:5000/api/get-todo");
+      const response = await axios.get("http://localhost:5000/api/get-todo",
+      {
+        params:{
+          user_id: currentUser.id,
+        },
+      }
+      );
       setTodos(response.data.data);
     } 
     catch (error) {
@@ -30,6 +42,7 @@ function Todo() {
 
   try{
     const response= await axios.post("http://localhost:5000/api/create-todo",{
+      user_id: currentUser.id,
       title:title,
       description:description,
       priority:priority
@@ -46,7 +59,7 @@ function Todo() {
   catch (error) {
     console.error("Error creating todo:", error);
   }
-  }
+  };
 
 
   
