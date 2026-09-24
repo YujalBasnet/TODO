@@ -14,7 +14,7 @@ export const getTodos = (req, res) => {
             }
             return res.status(200).send({message: "Data fetched successfully", data: data});
         });
-        
+
     }catch(error){
         console.log(error);
     }
@@ -56,6 +56,17 @@ export const createTodo = (req, res) => {
   } catch (error) {
     console.log(error);
 
+    return res.status(500).send({
+      message: "Server error",
+    });
+  }
+};
+
+export const deleteTodo = (req, res) => {
+  try{
+
+  }catch(error){
+    console.log(error);
     return res.status(500).send({
       message: "Server error",
     });
