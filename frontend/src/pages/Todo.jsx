@@ -61,6 +61,24 @@ function Todo() {
   }
   };
 
+  const handelDelete = async (id) => {
+    const confirmDelete = window.confirm("Are you sure you want to delete this todo?");
+    if (!confirmDelete) {
+      return;
+    }
+
+    try{
+      const response = await axios.delete(`http://localhost:5000/api/delete-todo/${id}`, {
+        data: {
+          user_id: currentUser.id
+        }
+      });
+      setTodos(todos.filter((todo) => todo.id !== id));
+    }
+    catch (error) {
+      console.error("Error deleting todo:", error);
+    }
+  };
 
   
   const handleCancel = () => {
@@ -184,6 +202,13 @@ function Todo() {
 
               {todo.priority}
             </p>
+            <div className="flex justify-center mt-[25px]">
+              <button
+                onClick={() => handleDelete(todo.id)}
+                className="border-2 border-black bg-white px-5 py-2 cursor-pointer hover:bg-red-500 hover:text-white rounded-lg">
+                Delete
+              </button>
+            </div>
 
           </div>
         ))}
