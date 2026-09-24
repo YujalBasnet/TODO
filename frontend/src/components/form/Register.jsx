@@ -1,6 +1,7 @@
 
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -54,27 +55,12 @@ const Register = () => {
     setError("");
 
     try {
-      /*
-       * Keep your existing signup/API request here.
-       *
-       * Example:
-       *
-       * const response = await axios.post("YOUR_SIGNUP_API", {
-       *   name,
-       *   email,
-       *   password,
-       * });
-       */
-
-      await new Promise((resolve) => setTimeout(resolve, 800));
-
-      console.log("Signup data:", {
-        name,
-        email,
-        password,
+      const response = await axios.post("http://localhost:5000/user/register", {
+        name: name,
+        email: email,
+        password: password,
       });
-
-      // Change this if your app redirects somewhere else after signup.
+      console.log("Registration successful:", response.data);
       navigate("/login");
     } catch (err) {
       setError(
