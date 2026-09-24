@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext} from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 
@@ -80,35 +80,32 @@ function Todo() {
   };
 
   return (
-    <div className="min-h-screen border-2 border-black bg-[#3a1111]">
+    <div className="min-h-screen border-2 border-black bg-[#3a1111] px-3 sm:px-5 lg:px-8">
 
-      <h1 className="text-center text-white text-5xl pt-2">
+      <h1 className="text-center text-white text-3xl sm:text-4xl lg:text-5xl pt-4">
         TODO LIST
       </h1>
 
       
-      <div className="flex justify-center items-center mt-[20px] py-[10px]">
+      <div className="flex flex-col sm:flex-row justify-center items-stretch sm:items-center gap-3 mt-5 py-3">
 
-        <input
-          className="w-1/2 border-2 border-black text-2xl bg-white p-[10px] rounded-lg"
+        <input className="w-full sm:w-1/2 border-2 border-black text-lg sm:text-2xl bg-white p-3 rounded-lg"
           type="text"
           placeholder="Search"
         />
 
-        <button
-          onClick={handleAdd}
-          className="ml-[10px] border-2 border-black text-2xl cursor-pointer py-[10px] px-[20px] bg-white rounded-lg hover:bg-gray-300"
-        >
+        <button onClick={handleAdd}
+          className="w-full sm:w-auto border-2 border-black text-lg sm:text-2xl cursor-pointer py-3 px-6 bg-white rounded-lg hover:bg-gray-300">
           Add
         </button>
 
       </div>
 
-      <div className="grid grid-cols-4 gap-[20px] px-[20px] mt-[20px] items-start">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 mt-5 pb-8 items-start">
 
 
         {showForm && (
-  <div className="min-h-[420px] border-2 border-black bg-[#124f4f] p-[20px]">
+    <div className="min-h-[280px] sm:min-h-[420px] border-2 border-black bg-[#124f4f] p-4 sm:p-5 rounded-xl">
     
     <h2 className="text-center text-white text-2xl font-bold mb-[15px]">
       Add Todo
@@ -163,7 +160,7 @@ function Todo() {
         {todos.map((todo) => (
           <div
             key={todo.id}
-            className="h-[33vh] border-2 border-black bg-[#124f4f] rounded-xl p-[20px]"
+            className="min-h-[280px] border-2 border-black bg-[#124f4f] rounded-xl p-5"
           >
 
             <h2 className="text-center text-white text-2xl font-bold border-b-2 border-white pb-[10px]">
