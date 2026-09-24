@@ -61,7 +61,7 @@ function Todo() {
   }
   };
 
-  const handelDelete = async (id) => {
+  const handleDelete = async (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this todo?");
     if (!confirmDelete) {
       return;
