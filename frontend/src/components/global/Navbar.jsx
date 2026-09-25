@@ -14,15 +14,16 @@ const Navbar = () => {
   return (
     <nav className="h-20 bg-amber-600 px-8 flex items-center justify-between">
 
-      <Link to="/" className="text-3xl font-bold text-white">
+      <div className="text-3xl font-bold text-white">
         Todo App
-      </Link>
+      </div>
 
       <div className="flex items-center gap-6">
-
+      {! currentUser && (
         <NavLink to="/" className="text-white">
           Home
         </NavLink>
+      )}
 
         {currentUser ? (
           <>
