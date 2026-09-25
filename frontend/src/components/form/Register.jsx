@@ -55,17 +55,21 @@ const Register = () => {
     setError("");
 
     try {
-      const response = await axios.post("http://localhost:5000/user/register", {
-        name: name,
-        email: email,
-        password: password,
-      });
-      
+      const response = await axios.post(
+        "http://localhost:5000/user/register",
+        {
+          name: name,
+          email: email,
+          password: password,
+        }
+      );
+
       console.log("Registration successful:", response.data);
 
       navigate("/login");
     } catch (err) {
       setError(
+        err.response?.data?.message ||
         "Unable to create your account. Please try again."
       );
     } finally {
@@ -74,86 +78,127 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-50 flex items-center justify-center px-4 py-10">
-      <div className="w-full max-w-5xl overflow-hidden rounded-3xl bg-white shadow-xl shadow-slate-200/70 md:grid md:grid-cols-2">
+    <div className="min-h-screen bg-slate-950 px-4 py-10 flex items-center justify-center">
 
-        {/* Left Side */}
-        <div className="hidden md:flex flex-col justify-between bg-blue-600 p-10 lg:p-12 text-white">
-          <div>
+      <div className="w-full max-w-6xl overflow-hidden rounded-3xl border border-slate-800 bg-slate-900 shadow-2xl md:grid md:grid-cols-2">
+
+        {/* LEFT SIDE */}
+        <div className="relative hidden md:flex flex-col justify-between overflow-hidden bg-gradient-to-br from-indigo-600 via-purple-600 to-slate-900 p-10 lg:p-14 text-white">
+
+          {/* Decorative circles */}
+          <div className="absolute -right-20 -top-20 h-64 w-64 rounded-full bg-white/10" />
+          <div className="absolute -bottom-24 -left-20 h-72 w-72 rounded-full bg-black/10" />
+
+          <div className="relative z-10">
             <Link
               to="/"
-              className="inline-flex items-center gap-2 text-2xl font-bold tracking-tight"
+              className="flex items-center gap-3 text-2xl font-bold"
             >
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/15">
-                F
+              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/15 text-xl">
+                ✓
               </span>
-              FakeStore
+
+              Todo App
             </Link>
           </div>
 
-          <div className="my-12">
-            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-blue-100">
-              Join us
+          <div className="relative z-10 my-12">
+
+            <p className="mb-4 text-sm font-semibold uppercase tracking-[0.25em] text-indigo-200">
+              Get organized
             </p>
 
-            <h1 className="max-w-md text-4xl font-bold leading-tight lg:text-5xl">
-              Your shopping journey starts here.
+            <h1 className="max-w-lg text-4xl font-bold leading-tight lg:text-5xl">
+              Stay focused.
+              <br />
+              Get things done.
             </h1>
 
-            <p className="mt-6 max-w-md text-base leading-7 text-blue-100">
-              Create your account and enjoy a simple, convenient shopping
-              experience built around you.
+            <p className="mt-6 max-w-md text-base leading-7 text-indigo-100">
+              Create your account and start managing your tasks
+              in one simple and organized place.
             </p>
+
+            <div className="mt-8 space-y-4 text-sm text-indigo-100">
+
+              <div className="flex items-center gap-3">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/15">
+                  ✓
+                </span>
+                Organize your daily tasks
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/15">
+                  ✓
+                </span>
+                Set priorities for your work
+              </div>
+
+              <div className="flex items-center gap-3">
+                <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/15">
+                  ✓
+                </span>
+                Keep everything in one place
+              </div>
+
+            </div>
           </div>
 
-          <p className="text-sm text-blue-100">
-            Simple shopping. Better experience.
+          <p className="relative z-10 text-sm text-indigo-200">
+            Simple tasks. Better productivity.
           </p>
         </div>
 
-        {/* Right Side */}
-        <div className="p-6 sm:p-10 lg:p-12">
+        {/* RIGHT SIDE */}
+        <div className="bg-slate-900 p-6 sm:p-10 lg:p-14">
+
           <div className="mx-auto max-w-md">
 
             {/* Mobile Logo */}
             <Link
               to="/"
-              className="mb-8 inline-flex items-center gap-2 text-xl font-bold text-slate-900 md:hidden"
+              className="mb-8 flex items-center gap-3 text-xl font-bold text-white md:hidden"
             >
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-blue-600 text-white">
-                F
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-600 text-white">
+                ✓
               </span>
-              FakeStore
+
+              Todo App
             </Link>
 
+            {/* Header */}
             <div className="mb-8">
-              <p className="mb-2 text-sm font-medium text-blue-600">
-                Get started
+
+              <p className="mb-2 text-sm font-semibold text-indigo-400">
+                Create your account
               </p>
 
-              <h2 className="text-3xl font-bold tracking-tight text-slate-900">
-                Create your account
+              <h2 className="text-3xl font-bold tracking-tight text-white">
+                Welcome aboard 👋
               </h2>
 
-              <p className="mt-2 text-sm leading-6 text-slate-500">
-                Fill in your details below to create your FakeStore account.
+              <p className="mt-3 text-sm leading-6 text-slate-400">
+                Create an account to start managing your todos.
               </p>
+
             </div>
 
             {/* Error */}
             {error && (
-              <div className="mb-6 rounded-xl border border-red-100 bg-red-50 px-4 py-3 text-sm text-red-600">
+              <div className="mb-6 rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3 text-sm text-red-400">
                 {error}
               </div>
             )}
 
+            {/* FORM */}
             <form onSubmit={handleSubmit} className="space-y-5">
 
               {/* Name */}
               <div>
                 <label
                   htmlFor="name"
-                  className="mb-2 block text-sm font-semibold text-slate-700"
+                  className="mb-2 block text-sm font-medium text-slate-300"
                 >
                   Full name
                 </label>
@@ -166,7 +211,7 @@ const Register = () => {
                   onChange={handleChange}
                   placeholder="John Doe"
                   autoComplete="name"
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10"
+                  className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-slate-500 hover:border-slate-600 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
                 />
               </div>
 
@@ -174,7 +219,7 @@ const Register = () => {
               <div>
                 <label
                   htmlFor="email"
-                  className="mb-2 block text-sm font-semibold text-slate-700"
+                  className="mb-2 block text-sm font-medium text-slate-300"
                 >
                   Email address
                 </label>
@@ -187,7 +232,7 @@ const Register = () => {
                   onChange={handleChange}
                   placeholder="you@example.com"
                   autoComplete="email"
-                  className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10"
+                  className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-slate-500 hover:border-slate-600 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
                 />
               </div>
 
@@ -195,12 +240,13 @@ const Register = () => {
               <div>
                 <label
                   htmlFor="password"
-                  className="mb-2 block text-sm font-semibold text-slate-700"
+                  className="mb-2 block text-sm font-medium text-slate-300"
                 >
                   Password
                 </label>
 
                 <div className="relative">
+
                   <input
                     id="password"
                     name="password"
@@ -209,19 +255,22 @@ const Register = () => {
                     onChange={handleChange}
                     placeholder="Create a password"
                     autoComplete="new-password"
-                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5 pr-20 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10"
+                    className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3.5 pr-20 text-sm text-white outline-none transition placeholder:text-slate-500 hover:border-slate-600 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
                   />
 
                   <button
                     type="button"
-                    onClick={() => setShowPassword((prev) => !prev)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 rounded-lg px-2 py-1 text-xs font-semibold text-slate-500 transition hover:bg-slate-100 hover:text-slate-700"
+                    onClick={() =>
+                      setShowPassword((prev) => !prev)
+                    }
+                    className="absolute right-3 top-1/2 -translate-y-1/2 rounded-lg px-2 py-1 text-xs font-semibold text-slate-400 transition hover:bg-slate-700 hover:text-white"
                   >
                     {showPassword ? "Hide" : "Show"}
                   </button>
+
                 </div>
 
-                <p className="mt-2 text-xs text-slate-400">
+                <p className="mt-2 text-xs text-slate-500">
                   Use at least 6 characters.
                 </p>
               </div>
@@ -230,12 +279,13 @@ const Register = () => {
               <div>
                 <label
                   htmlFor="confirmPassword"
-                  className="mb-2 block text-sm font-semibold text-slate-700"
+                  className="mb-2 block text-sm font-medium text-slate-300"
                 >
                   Confirm password
                 </label>
 
                 <div className="relative">
+
                   <input
                     id="confirmPassword"
                     name="confirmPassword"
@@ -244,7 +294,7 @@ const Register = () => {
                     onChange={handleChange}
                     placeholder="Confirm your password"
                     autoComplete="new-password"
-                    className="w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5 pr-20 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 hover:border-slate-300 focus:border-blue-500 focus:bg-white focus:ring-4 focus:ring-blue-500/10"
+                    className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3.5 pr-20 text-sm text-white outline-none transition placeholder:text-slate-500 hover:border-slate-600 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
                   />
 
                   <button
@@ -252,50 +302,54 @@ const Register = () => {
                     onClick={() =>
                       setShowConfirmPassword((prev) => !prev)
                     }
-                    className="absolute right-3 top-1/2 -translate-y-1/2 rounded-lg px-2 py-1 text-xs font-semibold text-slate-500 transition hover:bg-slate-100 hover:text-slate-700"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 rounded-lg px-2 py-1 text-xs font-semibold text-slate-400 transition hover:bg-slate-700 hover:text-white"
                   >
                     {showConfirmPassword ? "Hide" : "Show"}
                   </button>
+
                 </div>
               </div>
 
               {/* Terms */}
               <div className="flex items-start gap-3">
+
                 <input
                   id="terms"
                   type="checkbox"
                   required
-                  className="mt-0.5 h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500"
+                  className="mt-1 h-4 w-4 rounded border-slate-700 bg-slate-800 text-indigo-600 focus:ring-indigo-500"
                 />
 
                 <label
                   htmlFor="terms"
-                  className="text-xs leading-5 text-slate-500"
+                  className="text-xs leading-5 text-slate-400"
                 >
                   I agree to the{" "}
                   <button
                     type="button"
-                    className="font-medium text-blue-600 hover:text-blue-700"
+                    className="font-medium text-indigo-400 hover:text-indigo-300"
                   >
                     Terms of Service
                   </button>{" "}
                   and{" "}
                   <button
                     type="button"
-                    className="font-medium text-blue-600 hover:text-blue-700"
+                    className="font-medium text-indigo-400 hover:text-indigo-300"
                   >
                     Privacy Policy
                   </button>
                   .
                 </label>
+
               </div>
 
               {/* Submit */}
               <button
                 type="submit"
                 disabled={loading}
-                className="flex w-full items-center justify-center rounded-xl bg-blue-600 px-4 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 transition hover:bg-blue-700 hover:shadow-blue-600/30 focus:outline-none focus:ring-4 focus:ring-blue-500/20 disabled:cursor-not-allowed disabled:opacity-60"
+                className="flex w-full items-center justify-center rounded-xl bg-indigo-600 px-4 py-3.5 text-sm font-semibold text-white shadow-lg shadow-indigo-600/20 transition hover:bg-indigo-500 focus:outline-none focus:ring-4 focus:ring-indigo-500/20 disabled:cursor-not-allowed disabled:opacity-60"
               >
+
                 {loading ? (
                   <>
                     <svg
@@ -324,38 +378,49 @@ const Register = () => {
                 ) : (
                   "Create account"
                 )}
+
               </button>
+
             </form>
 
             {/* Divider */}
             <div className="my-7 flex items-center gap-4">
-              <div className="h-px flex-1 bg-slate-200" />
 
-              <span className="text-xs font-medium uppercase tracking-wider text-slate-400">
+              <div className="h-px flex-1 bg-slate-800" />
+
+              <span className="text-xs font-medium uppercase tracking-wider text-slate-500">
                 Already a member?
               </span>
 
-              <div className="h-px flex-1 bg-slate-200" />
+              <div className="h-px flex-1 bg-slate-800" />
+
             </div>
 
             {/* Login */}
-            <p className="text-center text-sm text-slate-500">
+            <p className="text-center text-sm text-slate-400">
+
               Already have an account?{" "}
+
               <Link
                 to="/login"
-                className="font-semibold text-blue-600 transition hover:text-blue-700"
+                className="font-semibold text-indigo-400 transition hover:text-indigo-300"
               >
                 Sign in
               </Link>
+
             </p>
 
-            <p className="mt-8 text-center text-xs leading-5 text-slate-400">
+            <p className="mt-8 text-center text-xs leading-5 text-slate-600">
               By creating an account, you agree to our terms and privacy
               policy.
             </p>
+
           </div>
+
         </div>
+
       </div>
+
     </div>
   );
 };
