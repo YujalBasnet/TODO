@@ -1,5 +1,6 @@
 import database from "../database/database.js";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
 
 // REGISTER
 export const register = async (req, res) => {
@@ -119,8 +120,7 @@ export const login = (req, res) => {
         username: user.name,
         userEmail: user.email,
       }, "mysecretkey",
-      
-    );
+      );
       // Don't send password to frontend
       return res.status(200).json({
         message: "Login successful",
