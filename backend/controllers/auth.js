@@ -58,6 +58,7 @@ export const register = async (req, res) => {
               name,
               email,
               phone: phone || null,
+              role: "user", // Default role
             },
           });
         }
@@ -119,16 +120,19 @@ export const login = (req, res) => {
         userId: user.id,
         username: user.name,
         userEmail: user.email,
+        userRole: user.role,
       }, "mysecretkey",
       );
       // Don't send password to frontend
       return res.status(200).json({
         message: "Login successful",
+        token: token,
         user: {
           id: user.id,
           name: user.name,
           email: user.email,
           phone: user.phone,
+          role: user.role,
         },
       });
     });
