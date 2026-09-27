@@ -27,6 +27,7 @@ const AuthContextProvider = ({ children }) => {
         "appUser",
         JSON.stringify(loggedInUser)
       );
+      localStorage.setItem("token", response.data.token);
 
       setCurrentUser(loggedInUser);
 

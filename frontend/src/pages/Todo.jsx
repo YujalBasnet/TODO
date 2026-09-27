@@ -19,10 +19,12 @@ function Todo() {
 
   const getTodos = async () => {
     try {
+      const token = localStorage.getItem("token");
       const response = await axios.get("http://localhost:5000/api/get-todo",
       {
-        params:{
-          user_id: currentUser.id,
+        headers:{
+          Authorization: `Bearer ${token}`,
+          
         },
       }
       );
@@ -41,11 +43,16 @@ function Todo() {
   }
 
   try{
+    const token = localStorage.getItem("token");
     const response= await axios.post("http://localhost:5000/api/create-todo",{
-      user_id: currentUser.id,
+      
       title:title,
       description:description,
       priority:priority
+    }, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
     });
     console.log(response.data);
     
@@ -68,10 +75,12 @@ function Todo() {
     }
 
     try{
+      const token = localStorage.getItem("token");
       const response = await axios.delete(`http://localhost:5000/api/delete-todo/${id}`, {
-        data: {
-          user_id: currentUser.id
-        }
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        
       });
       setTodos(todos.filter((todo) => todo.id !== id));
     }
