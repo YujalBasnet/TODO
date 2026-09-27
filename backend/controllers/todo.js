@@ -3,10 +3,8 @@ import database from "../database/database.js";
 
 export const getTodos = (req, res) => {
     try{
-      const { user_id } = req.query;
-      if(!user_id){
-        return res.status(400).send({message: "user_id is required"});
-      }
+      const user_id = req.user?.userId; // Get user_id from the decoded token
+  
         const q = "SELECT * FROM todos WHERE user_id = ? ORDER BY id DESC";
         database.query(q, [user_id], (err, data) => {
             if(err){
