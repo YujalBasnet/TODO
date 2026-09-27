@@ -49,3 +49,14 @@ export const isUser =(req, res, next)=>{
         });
     }
 };
+
+export const isAdminOrSuperAdmin =(req, res, next)=>{
+    const role = req.userRole;
+    if (role ==="admin" || role ==="superAdmin"){
+        next();
+    } else{
+        res.status(401).send({
+            message: "Unauthorized",
+        });
+    }
+};
