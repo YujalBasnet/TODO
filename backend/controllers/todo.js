@@ -23,9 +23,10 @@ export const getTodos = (req, res) => {
 
 export const createTodo = (req, res) => {
   try {
-    const { user_id, title, description, priority } = req.body;
+    const {  title, description, priority } = req.body;
+    const user_id = req.user?.userId; // Get user_id from the decoded token
 
-    if (!user_id || !title || !description || !priority) {
+    if (!title || !description || !priority) {
       return res.status(400).send({
         message: "Please provide all required fields",
       });

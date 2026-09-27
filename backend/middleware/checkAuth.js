@@ -11,6 +11,8 @@ export const isLoggedIn = (req, res, next) => {
     try{
     const decoded = jwt.verify(token, "mysecretkey");
 
+    req.user= decoded;
+
     req.userRole = decoded.role === "admin"? "admin" :
     decoded.role === "user" ? "user" : null;
 
