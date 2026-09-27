@@ -64,15 +64,15 @@ export const createTodo = (req, res) => {
 export const deleteTodo = (req, res) => {
   try{
 
-    console.log("Params:", req.params);
-    console.log("Body:", req.body);
+    // console.log("Params:", req.params);
+    // console.log("Body:", req.body);
 
     const { id } = req.params;
-    const {user_id} = req.body;
+    const user_id = req.user?.userId; // Get user_id from the decoded token
     console.log("Todo ID:", id, "User ID:", user_id);
 
-    if(!id || !user_id){
-      return res.status(400).send({message: "id and user_id are required"});
+    if(!id){
+      return res.status(400).send({message: "TODO ID is required"});
     }
     const q = "DELETE FROM todos WHERE id = ? AND user_id = ?";
 
