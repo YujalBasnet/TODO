@@ -17,3 +17,13 @@ export const isLoggedIn = (req, res, next) => {
     next();
 };
 
+export const isAdmin =(req, res, next)=>{
+    const role = req.userRole;
+    if (role ==="admin"){
+        next();
+    } else{
+        res.status(401).send({
+            message: "Unauthorized",
+        });
+    }
+}
