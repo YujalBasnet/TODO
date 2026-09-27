@@ -26,4 +26,15 @@ export const isAdmin =(req, res, next)=>{
             message: "Unauthorized",
         });
     }
-}
+};
+
+export const isSuperAdmin =(req, res, next)=>{
+    const role = req.userRole;
+    if (role ==="superAdmin"){
+        next();
+    } else{
+        res.status(401).send({
+            message: "Unauthorized",
+        });
+    }
+};
