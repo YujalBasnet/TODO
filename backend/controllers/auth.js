@@ -113,7 +113,14 @@ export const login = (req, res) => {
           message: "Invalid email or password",
         });
       }
-
+      
+      const token = jwt.sign ({
+        userId: user.id,
+        username: user.name,
+        userEmail: user.email,
+      }, "mysecretkey",
+      
+    );
       // Don't send password to frontend
       return res.status(200).json({
         message: "Login successful",
