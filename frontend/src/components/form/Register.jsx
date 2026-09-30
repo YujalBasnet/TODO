@@ -11,12 +11,14 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    image: null, // New state for the image file
   });
 
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [image, setImage] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -257,6 +259,19 @@ const Register = () => {
                     autoComplete="new-password"
                     className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3.5 pr-20 text-sm text-white outline-none transition placeholder:text-slate-500 hover:border-slate-600 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
                   />
+
+                  <div>
+                    <label className ="block text-sm font-medium text-slate-300 mb-2">
+                      Profile Image
+                      </label>
+
+                      <input
+                        type="file"
+                        accept="image/jpeg, image/jpg, image/png, image/gif"
+                        onChange={(e) => setFormData({...formData, image: e.target.files[0]})}
+                        className="w-full rounded-xl border border-slate-700 bg-slate-800 px-4 py-3.5 text-sm text-white outline-none transition placeholder:text-slate-500 hover:border-slate-600 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/10"
+                      />
+                  </div>
 
                   <button
                     type="button"
