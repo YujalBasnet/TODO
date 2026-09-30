@@ -42,13 +42,24 @@ const AuthContextProvider = ({ children }) => {
   //REGISTER
   const register = async (value) => {
     try {
+
+      const data = new FormData();
+
+      data.append("name", value.name);
+      data.append("email", value.email);
+      data.append("password", value.password);
+
+      if (value.image) {
+        data.append("image", value.image);
+      }
+
+      if (value.phone){
+        data.append("phone", value.phone);
+      }
+
       const response = await axios.post(
         "http://localhost:5000/user/register",
-        {
-          name: value.name,
-          email: value.email,
-          password: value.password,
-        }
+        data 
       );
       return response.data;
     } catch (error) {
