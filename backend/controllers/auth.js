@@ -7,6 +7,9 @@ export const register = async (req, res) => {
   try {
     const { name, email, phone, password } = req.body;
 
+    //uplod vako image ko path
+    const imagepath= re.file? `images/${req.file.filename}`: null;
+
     // Check required fields
     if (!name || !email || !password) {
       return res.status(400).json({
@@ -51,16 +54,46 @@ export const register = async (req, res) => {
             });
           }
 
-          return res.status(201).json({
-            message: "User registered successfully",
-            user: {
-              id: result.insertId,
-              name,
-              email,
-              phone: phone || null,
-              role: "user", // Default role
-            },
-          });
+          const userId = result.insertId;
+
+          if(imagepath){
+            const imageQuery = "insert into profile (user_id,path) values(?,?)";
+
+            database.query(imageQuery, [userId, imagePath],
+              (err, result) => {
+                if (err) {
+                  return res.status(500).json({
+                    message: "Error while saving profile image",
+                    error: err,
+                  });
+                }
+
+                return res.status(201).json({
+                  message: "User registered successfully",
+                  user: {
+                    id: userId,
+                    name,
+                    email,
+                    phone: phone || null,
+                    role: "user",
+                    image: imagepath, // Default role
+                  },
+                });
+              }
+            );
+          } else {
+            return res.status(201).json({
+              message: "User registered successfully",
+              user: {
+                id: userId,
+                name,
+                email,
+                phone: phone || null,
+                role: "user",
+                image: null, 
+              },
+            });
+          }
         }
       );
     });
