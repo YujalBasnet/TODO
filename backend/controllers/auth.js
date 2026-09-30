@@ -5,10 +5,12 @@ import jwt from "jsonwebtoken";
 // REGISTER
 export const register = async (req, res) => {
   try {
+    console.log("BODY:", req.body);
+    console.log("FILE:", req.file);
     const { name, email, phone, password } = req.body;
 
     //uplod vako image ko path
-    const imagepath= re.file? `images/${req.file.filename}`: null;
+    const imagepath= req.file? `images/${req.file.filename}`: null;
 
     // Check required fields
     if (!name || !email || !password) {
@@ -59,7 +61,7 @@ export const register = async (req, res) => {
           if(imagepath){
             const imageQuery = "insert into profile (user_id,path) values(?,?)";
 
-            database.query(imageQuery, [userId, imagePath],
+            database.query(imageQuery, [userId, imagepath],
               (err, result) => {
                 if (err) {
                   return res.status(500).json({
