@@ -11,6 +11,7 @@ const Register = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    phone: "",
     image: null, // New state for the image file
   });
 

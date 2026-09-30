@@ -78,7 +78,7 @@ export const register = async (req, res) => {
                     email,
                     phone: phone || null,
                     role: "user",
-                    image: imagepath, // Default role
+                    image: imagepath,
                   },
                 });
               }
@@ -120,7 +120,17 @@ export const login = (req, res) => {
       });
     }
 
-    const query = "SELECT * FROM users WHERE email = ?";
+    const query = ` SELECT 
+    users.id,
+    users.name,
+    users.email,
+    users.phone,
+    users.password,
+    users.role,
+    profile.path AS image 
+  FROM users 
+  LEFT JOIN profile ON users.id = profile.user_id 
+  WHERE users.email = ?`;
 
     database.query(query, [email], async (err, data) => {
       if (err) {
@@ -168,6 +178,7 @@ export const login = (req, res) => {
           email: user.email,
           phone: user.phone,
           role: user.role,
+          image: user.image,
         },
       });
     });
