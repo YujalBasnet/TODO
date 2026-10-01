@@ -36,19 +36,33 @@ const App = () => {
       children: [
         {
           index: true, 
-          element: <Landing/>,
+          element: ( 
+          <PublicRoute>
+            <Landing />
+          </PublicRoute>),
         },
         {
           path: "todo",
-          element:< Todo />,
+          element:(
+          < ProtectedRoute>
+            <Todo />
+          </ProtectedRoute>),
         },
         {
           path: "login",
-          element: <Login/>
+          element: (
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
+          ),
         },
         {
           path: "register",
-          element: <Register/>
+          element: (
+          <PublicRoute>
+            <Register />
+          </PublicRoute>
+          )
         }
       ],
     },
