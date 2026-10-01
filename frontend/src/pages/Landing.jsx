@@ -76,7 +76,7 @@ const Landing = () => {
 
   return (
     <>
-      <style>{`
+      {/* <style>{`
         @keyframes wordAppear {
           0% {
             opacity: 0;
@@ -198,7 +198,7 @@ const Landing = () => {
         .underline {
           animation: lineGrow 1.5s ease-out forwards;
         }
-      `}</style>
+      `}</style> */}
 
       <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-black to-slate-900 text-slate-100">
 

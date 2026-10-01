@@ -76,7 +76,7 @@ const About = () => {
 
   return (
     <>
-      <style>{`
+      {/* <style>{`
         @keyframes gridPulse {
           0% {
             opacity: 0.08;
@@ -197,7 +197,7 @@ const About = () => {
           border-color: rgba(148, 163, 184, 0.35);
           background: rgba(15, 23, 42, 0.8);
         }
-      `}</style>
+      `}</style> */}
 
       <div className="relative min-h-screen overflow-hidden bg-gradient-to-br from-slate-950 via-black to-slate-900 text-slate-100">
 
