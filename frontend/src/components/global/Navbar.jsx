@@ -20,9 +20,15 @@ const Navbar = () => {
 
       <div className="flex items-center gap-6">
       {! currentUser && (
-        <NavLink to="/" className="text-white">
-          Home
-        </NavLink>
+        <>
+          <NavLink to="/" className="text-white">
+            Home
+          </NavLink>
+
+          <NavLink to ="/about" className="text-white">
+            About
+          </NavLink>
+        </>
       )}
 
         {currentUser ? (

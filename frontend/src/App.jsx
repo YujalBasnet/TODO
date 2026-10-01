@@ -5,6 +5,7 @@ import Landing from "./pages/Landing";
 import Todo from "./pages/todo";
 import Login from "./components/form/Login";
 import Register from "./components/form/Register";
+import About from "./pages/About";
 
 
 
@@ -39,6 +40,13 @@ const App = () => {
           element: ( 
           <PublicRoute>
             <Landing />
+          </PublicRoute>),
+        },
+        {
+          path: "about",
+          element: (
+          <PublicRoute>
+            <About />
           </PublicRoute>),
         },
         {
