@@ -18,6 +18,16 @@ const ProtectedRoute = ({ children }) => {
   return children;
 };
 
+
+const PublicRoute = ({ children}) => {
+  const user = localStorage.getItem("user");
+
+  if (user){
+    return <Navigate to="/todo" replace />;
+  }
+  return children;
+};
+
 const App = () => {
   const router = createBrowserRouter([
     {
@@ -25,7 +35,7 @@ const App = () => {
       element: <Home/>,
       children: [
         {
-          index: true,
+          index: true, 
           element: <Landing/>,
         },
         {
