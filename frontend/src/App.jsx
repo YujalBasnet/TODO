@@ -9,7 +9,7 @@ import Register from "./components/form/Register";
 
 
 const ProtectedRoute = ({ children }) => {
-  const user = localStorage.getItem("user");
+  const user = localStorage.getItem("appUser");
 
   if (!user) {
     return <Navigate to="/" replace />;
@@ -20,7 +20,7 @@ const ProtectedRoute = ({ children }) => {
 
 
 const PublicRoute = ({ children}) => {
-  const user = localStorage.getItem("user");
+  const user = localStorage.getItem("appUser");
 
   if (user){
     return <Navigate to="/todo" replace />;
