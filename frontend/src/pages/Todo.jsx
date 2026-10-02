@@ -13,6 +13,8 @@ function Todo() {
   const [priority, setPriority] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [dueTime, setDueTime] = useState("");
+  const [aiText, setAiText] = useState("");
+  const [aiLoading, setAiLoading] = useState(false);
 
   // Mouse glow
   const [mousePosition, setMousePosition] = useState({
@@ -80,11 +82,54 @@ function Todo() {
     }
   };
 
+  const handleAIUnderstand = async () => {
+  if (!aiText.trim()) {
+    alert("Please describe your task first!");
+    return;
+  }
+
+  try {
+    setAiLoading(true);
+
+    const token = localStorage.getItem("token");
+
+    const response = await axios.post(
+      "http://localhost:5000/api/ai/parse-todo",
+      {
+        text: aiText,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    const aiTodo = response.data;
+
+    setTitle(aiTodo.title || "");
+    setDescription(aiTodo.description || "");
+    setPriority(aiTodo.priority || "");
+    setDueDate(aiTodo.due_date || "");
+    setDueTime(aiTodo.due_time || "");
+
+  } catch (error) {
+    console.error("AI Todo Error:", error);
+
+    alert(
+      error.response?.data?.message ||
+      "AI could not understand your task. Please try again."
+    );
+  } finally {
+    setAiLoading(false);
+  }
+};
+
   // -----------------------------
   // Create Todo
   // -----------------------------
   const handleSubmit = async () => {
-    if (!title || !description || !priority) {
+    if (!title || !priority) {
       alert("Please fill all fields!");
       return;
     }
@@ -160,6 +205,7 @@ function Todo() {
     setPriority("");
     setDueDate("");
     setDueTime("");
+    setAiText("");
     setShowForm(false);
   };
 
@@ -172,6 +218,7 @@ function Todo() {
     setPriority("");
     setDueDate("");
     setDueTime("");
+    setAiText("");
     setShowForm(true);
   };
 
@@ -341,6 +388,35 @@ function Todo() {
                   </span>
 
                 </div>
+                {/* AI Todo */}
+<div className="mb-6 rounded-xl border border-slate-700 bg-slate-950/60 p-4">
+
+  <p className="text-xs font-mono uppercase tracking-[0.2em] text-slate-500">
+    AI Todo Assistant
+  </p>
+
+  <p className="mt-2 text-xs leading-5 text-slate-600">
+    Describe your task naturally and let AI fill the Todo details.
+  </p>
+
+  <textarea
+    className="serenity-input mt-4 w-full resize-none rounded-lg border border-slate-700 bg-slate-900 p-3 text-sm text-slate-200 placeholder-slate-600"
+    placeholder="Example: Submit my assignment tomorrow at 5 PM"
+    rows="3"
+    value={aiText}
+    onChange={(e) => setAiText(e.target.value)}
+  />
+
+  <button
+    type="button"
+    onClick={handleAIUnderstand}
+    disabled={aiLoading}
+    className="mt-3 w-full rounded-lg border border-slate-600 bg-slate-800 px-4 py-2.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-200 transition hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-50"
+  >
+    {aiLoading ? "Understanding..." : "✨ Understand with AI"}
+  </button>
+
+</div>
 
                 {/* Title */}
                 <input
@@ -371,6 +447,22 @@ function Todo() {
                   <option value="Medium">Medium</option>
                   <option value="Low">Low</option>
                 </select>
+
+                {/* Due Date */}
+<input
+  className="serenity-input mt-4 w-full rounded-lg border border-slate-700 bg-slate-950/80 p-3 text-sm text-slate-300"
+  type="date"
+  value={dueDate}
+  onChange={(e) => setDueDate(e.target.value)}
+/>
+
+{/* Due Time */}
+<input
+  className="serenity-input mt-4 w-full rounded-lg border border-slate-700 bg-slate-950/80 p-3 text-sm text-slate-300"
+  type="time"
+  value={dueTime}
+  onChange={(e) => setDueTime(e.target.value)}
+/>
 
                 {/* Buttons */}
                 <div className="mt-5 flex gap-3">
