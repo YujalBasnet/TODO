@@ -11,6 +11,8 @@ function Todo() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priority, setPriority] = useState("");
+  const [dueDate, setDueDate] = useState("");
+  const [dueTime, setDueTime] = useState("");
 
   // Mouse glow
   const [mousePosition, setMousePosition] = useState({
