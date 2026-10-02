@@ -1,11 +1,14 @@
+
+console.log("Gemini key loaded:", !!process.env.GEMINI_API_KEY);
 import express from "express";
 import UserRoutes from "./routes/user.route.js";
 import database from "./database/database.js";
 import todoRoutes from "./routes/todo.routes.js";
+import aiRoutes from "./routes/ai.routes.js";
 // import AuthRoutes from "./routes/auth.route.js";
 import cors from "cors";
 
-
+// dotenv.config();
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -17,6 +20,7 @@ const PORT = 5000;
 
 
 app.use("/api", todoRoutes);
+app.use("/api/ai", aiRoutes);
 app.use("/user", UserRoutes);
 // app.use("/api", AuthRoutes); 
 // app.get("/", (req, res) => {
