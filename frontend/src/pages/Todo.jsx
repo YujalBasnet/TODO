@@ -98,6 +98,8 @@ function Todo() {
           title: title,
           description: description,
           priority: priority,
+          due_date: dueDate || null,
+          due_time: dueTime || null
         },
         {
           headers: {
@@ -156,6 +158,8 @@ function Todo() {
     setTitle("");
     setDescription("");
     setPriority("");
+    setDueDate("");
+    setDueTime("");
     setShowForm(false);
   };
 
@@ -166,6 +170,8 @@ function Todo() {
     setTitle("");
     setDescription("");
     setPriority("");
+    setDueDate("");
+    setDueTime("");
     setShowForm(true);
   };
 
