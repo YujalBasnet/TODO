@@ -21,7 +21,7 @@ export const getTodos = (req, res) => {
 
 export const createTodo = (req, res) => {
   try {
-    const {  title, description, priority } = req.body;
+    const {  title, description, priority, due_date, due_time } = req.body;
     const user_id = req.user?.userId; // Get user_id from the decoded token
 
     if (!title || !description || !priority) {
@@ -31,9 +31,9 @@ export const createTodo = (req, res) => {
     }
 
     const q =
-      "INSERT INTO todos (user_id, title, description, priority) VALUES (?, ?, ?, ?)";
+      "INSERT INTO todos (user_id, title, description, priority, due_date, due_time) VALUES (?, ?, ?, ?, ?, ?)";
 
-    database.query(q, [user_id,title, description, priority], (err, data) => {
+    database.query(q, [user_id,title, description, priority, due_date, due_time], (err, data) => {
       if (err) {
         return res.status(500).send({
           message: "Error while creating todo",
@@ -49,6 +49,8 @@ export const createTodo = (req, res) => {
           title: title,
           description: description,
           priority: priority,
+          due_date: due_date,
+          due_time: due_time,
         },
       });
     });
