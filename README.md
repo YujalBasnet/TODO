@@ -4,15 +4,15 @@ A full-stack task management application built with React, Vite, Express, MySQL,
 
 ## Features
 
-- User registration and login
-- Optional profile image upload during registration
-- Protected todo management for authenticated users
-- Create, view, and delete todo items
-- AI-powered todo parsing through Google Gemini
-- React client with route protection
-- Responsive styling with Tailwind CSS
-- REST API built with Express
-- MySQL database integration
+- User registration and login.
+- Optional profile image upload during registration.
+- Protected todo management for authenticated users.
+- Create, view, and delete todo items.
+- AI-powered todo parsing through Google Gemini.
+- React client with route protection.
+- Responsive styling with Tailwind CSS.
+- REST API built with Express.
+- MySQL database integration.
 
 ## Tech Stack
 
