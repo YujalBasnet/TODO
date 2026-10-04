@@ -125,9 +125,9 @@ function Todo() {
   }
 };
 
-  // -----------------------------
+
   // Create Todo
-  // -----------------------------
+
   const handleSubmit = async () => {
     if (!title || !priority) {
       alert("Please fill all fields!");
