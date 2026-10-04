@@ -54,9 +54,9 @@ function Todo() {
     };
   }, []);
 
-  // -----------------------------
+
   // Get Todos
-  // -----------------------------
+
   useEffect(() => {
     if (currentUser) {
       getTodos();
