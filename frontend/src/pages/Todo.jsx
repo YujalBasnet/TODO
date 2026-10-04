@@ -26,9 +26,9 @@ function Todo() {
   // Search
   const [search, setSearch] = useState("");
 
-  // -----------------------------
+ 
   // Mouse-following glow
-  // -----------------------------
+
   useEffect(() => {
     const handleMouseMove = (e) => {
       setMousePosition({
