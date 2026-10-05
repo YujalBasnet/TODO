@@ -211,7 +211,7 @@ function Todo() {
 
   // -----------------------------
   // Add
-  // -----------------------------
+
   const handleAdd = () => {
     setTitle("");
     setDescription("");
