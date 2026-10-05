@@ -222,7 +222,7 @@ function Todo() {
     setShowForm(true);
   };
 
-  // -----------------------------
+
   // Search Filter
 
   const filteredTodos = todos.filter((todo) =>
