@@ -224,7 +224,7 @@ function Todo() {
 
   // -----------------------------
   // Search Filter
-  // -----------------------------
+
   const filteredTodos = todos.filter((todo) =>
     todo.title.toLowerCase().includes(search.toLowerCase())
   );
